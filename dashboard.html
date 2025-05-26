@@ -10,41 +10,59 @@
 <body>
     <div class="container" style="padding-bottom: 70px;">
         <div id="wedding-info" class="card mb-3" style="position: relative;">
-            <span style="position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.7rem; color: #2d4c3f;">
+            <span style="position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.7rem; color: var(--text-dark);">
                 <i class="fas fa-bell"></i>
             </span>
             <h1 id="wedding-name" style="margin-bottom: 0.5rem;">Priya & Rohan's Wedding</h1>
-            <div style="background: #f8f8e7; border-radius: 1rem; padding: 1rem; margin-bottom: 1rem;">
-                <div style="font-size: 1rem; color: #2d4c3f; font-weight: 600; letter-spacing: 1px;">WEDDING DATE</div>
-                <div id="wedding-date" style="font-size: 2rem; font-weight: bold; color: #2d4c3f;">July 10, 2024</div>
-                <div id="days-remaining" style="font-size: 1.1rem; color: #2d4c3f;">90 days to go</div>
+            <div style="background: var(--secondary); border-radius: 1rem; padding: 1rem; margin-bottom: 1rem;">
+                <div style="font-size: 1rem; color: var(--primary); font-weight: 600; letter-spacing: 1px;">WEDDING DATE</div>
+                <div id="wedding-date" style="font-size: 2rem; font-weight: bold; color: var(--primary);">July 10, 2024</div>
+                <div id="days-remaining" style="font-size: 1.1rem; color: var(--primary);">90 days to go</div>
             </div>
         </div>
         <div style="margin-bottom: 1.5rem;">
-            <div style="font-weight: 600; color: #2d4c3f; letter-spacing: 1px; margin-bottom: 0.5rem;">QUICK NAVIGATION</div>
-            <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div style="font-weight: 600; color: var(--primary); letter-spacing: 1px; margin-bottom: 0.5rem;">QUICK NAVIGATION</div>
+            <div class="quick-nav-grid">
                 <a href="budget/budget.html" class="quick-nav-item">
-                    <div><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="icon-2d">
+                        <i class="fas fa-wallet"></i>
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
                     <div>Budget Tracker</div>
                     <div>Manage expenses</div>
                 </a>
                 <a href="shopping/shopping.html" class="quick-nav-item">
-                    <div><i class="fas fa-list"></i></div>
+                    <div class="icon-2d">
+                        <i class="fas fa-shopping-bag"></i>
+                        <i class="fas fa-check"></i>
+                    </div>
                     <div>Shopping Lists</div>
                     <div>View your lists</div>
                 </a>
                 <a href="tasks.html" class="quick-nav-item">
-                    <div><i class="fas fa-check-circle"></i></div>
+                    <div class="icon-2d">
+                        <i class="fas fa-clipboard"></i>
+                        <i class="fas fa-check-double"></i>
+                    </div>
                     <div>Quick Tasks</div>
                     <div>Track to-dos</div>
                 </a>
                 <a href="vendors.html" class="quick-nav-item">
-                    <div><i class="fas fa-store"></i></div>
+                    <div class="icon-2d">
+                        <i class="fas fa-store"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
                     <div>Vendor List</div>
                     <div>Browse vendors</div>
                 </a>
             </div>
         </div>
+
+        <!-- Quick Add Button -->
+        <button class="quick-add-btn" onclick="showQuickAddMenu()">
+            <i class="fas fa-plus nav-icon"></i>
+        </button>
+
         <div style="font-weight: 600; color: #2d4c3f; letter-spacing: 1px; margin-bottom: 0.5rem;">RECENT ACTIVITY</div>
         <div id="recent-activity" class="card">
             <div id="loading" class="loading-container">
@@ -71,29 +89,47 @@
     
     <!-- Bottom Navigation -->
     <div class="bottom-nav">
-        <a href="dashboard.html" class="nav-item active">
-            <i class="fas fa-home nav-icon"></i>
+        <a href="dashboard.html" class="nav-item active" data-icon="home">
+            <div class="icon-2d">
+                <i class="fas fa-home"></i>
+                <i class="fas fa-heart"></i>
+            </div>
             <span class="nav-text">Home</span>
         </a>
-        <a href="shopping/shopping.html" class="nav-item">
-            <i class="fas fa-list nav-icon"></i>
+        <a href="shopping/shopping.html" class="nav-item" data-icon="shopping">
+            <div class="icon-2d">
+                <i class="fas fa-shopping-bag"></i>
+                <i class="fas fa-check"></i>
+            </div>
             <span class="nav-text">Shopping</span>
         </a>
-        <a href="tasks.html" class="nav-item">
-            <i class="fas fa-check-circle nav-icon"></i>
+        <a href="tasks.html" class="nav-item" data-icon="tasks">
+            <div class="icon-2d">
+                <i class="fas fa-clipboard"></i>
+                <i class="fas fa-list-check"></i>
+            </div>
             <span class="nav-text">Tasks</span>
         </a>
-        <a href="vendors.html" class="nav-item">
-            <i class="fas fa-store nav-icon"></i>
+        <a href="vendors.html" class="nav-item" data-icon="vendors">
+            <div class="icon-2d">
+                <i class="fas fa-store"></i>
+                <i class="fas fa-star"></i>
+            </div>
             <span class="nav-text">Vendors</span>
         </a>
-        <a href="budget/budget.html" class="nav-item">
-            <i class="fas fa-money-bill-wave nav-icon"></i>
+        <a href="budget/budget.html" class="nav-item" data-icon="budget">
+            <div class="icon-2d">
+                <i class="fas fa-wallet"></i>
+                <i class="fas fa-rupee-sign"></i>
+            </div>
             <span class="nav-text">Budget</span>
         </a>
-        <a href="profile.html" class="nav-item">
-            <i class="fas fa-user nav-icon"></i>
-            <span class="nav-text">Profile</span>
+        <a href="profile.html" class="nav-item" data-icon="hub">
+            <div class="icon-2d">
+                <i class="fas fa-user"></i>
+                <i class="fas fa-ring"></i>
+            </div>
+            <span class="nav-text">Hub</span>
         </a>
     </div>
 

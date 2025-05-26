@@ -162,45 +162,6 @@ async function getUserGroups(userId) {
   }
 }
 
-// File upload function
-async function uploadShoppingItemImage(itemId, file) {
-  try {
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${itemId}.${fileExt}`;
-    const filePath = `shopping_item_images/${fileName}`;
-
-    const { data, error } = await supabase.storage
-      .from('wedding-photos') // Assuming you have a bucket named 'wedding-photos'
-      .upload(filePath, file, { cacheControl: '3600', upsert: true });
-
-    if (error) throw error;
-
-    // Get public URL
-    const { data: publicUrlData } = supabase.storage
-      .from('wedding-photos')
-      .getPublicUrl(filePath);
-
-    if (!publicUrlData || !publicUrlData.publicUrl) throw new Error('Could not get public URL after upload');
-
-    // Update the shopping item with the image URL
-    const { data: updateData, error: updateError } = await supabase
-      .from('shopping_items')
-      .update({ image_url: publicUrlData.publicUrl })
-      .eq('id', itemId)
-      .select()
-      .single();
-
-    if (updateError) throw updateError;
-
-    console.log('Image uploaded and item updated:', updateData);
-    return updateData;
-
-  } catch (error) {
-    console.error('Error uploading shopping item image:', error);
-    throw error;
-  }
-}
-
 // Export functions
 window.supabaseClient = {
   isAuthenticated,
@@ -349,5 +310,6 @@ window.supabaseClient = {
   },
 
   // File upload function
-  uploadShoppingItemImage
+  // uploadShoppingItemImage,
+  // getPublicImageUrl
 };

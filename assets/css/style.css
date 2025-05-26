@@ -1,24 +1,36 @@
 /* Main Stylesheet for ShaadiCart */
 
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lato:wght@300;400;700&display=swap');
+
 :root {
-  --primary: #00897B;
-  --primary-light: #4DB6AC;
-  --primary-dark: #00695C;
-  --secondary: #F0F4F1;
+  --primary: #1B5E20; /* Royal Green */
+  --primary-light: #4CAF50;
+  --primary-dark: #0D3C35;
+  --secondary: #FFF8E1; /* Ivory Cream */
   --secondary-light: #FFFFFF;
-  --secondary-dark: #E0E0E0;
-  --text-dark: #0D3C35;
-  --text-light: #4A6964;
+  --secondary-dark: #FFECB3;
+  --accent: #FFC107; /* Marigold Yellow */
+  --accent-dark: #FFA000;
+  --highlight: #FF7043; /* Saffron Orange */
+  --highlight-dark: #F4511E;
+  --decorative: #EC407A; /* Rose Pink */
+  --text-dark: #424242; /* Charcoal Grey */
+  --text-light: #757575;
   --danger: #FF5252;
   --success: #4CAF50;
   --warning: #FFC107;
+  
+  /* Font Variables */
+  --font-heading: 'Cinzel Decorative', cursive;
+  --font-body: 'Lato', sans-serif;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-body);
 }
 
 body {
@@ -35,22 +47,27 @@ body {
 }
 
 /* Typography */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--text-dark);
+}
+
 h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: var(--text-dark);
+  font-weight: 700;
 }
 
 h2 {
   font-size: 2rem;
   margin-bottom: 0.8rem;
-  color: var(--text-dark);
+  font-weight: 700;
 }
 
 h3 {
   font-size: 1.5rem;
   margin-bottom: 0.6rem;
-  color: var(--text-dark);
+  font-weight: 700;
 }
 
 p {
@@ -83,12 +100,12 @@ p {
 }
 
 .btn-secondary {
-  background-color: var(--secondary-dark);
+  background-color: var(--accent);
   color: var(--text-dark);
 }
 
 .btn-secondary:hover {
-  background-color: #d0d0d0;
+  background-color: var(--accent-dark);
 }
 
 .btn-danger {
@@ -115,8 +132,9 @@ p {
 .form-label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.2rem;
+  font-family: var(--font-body);
 }
 
 .form-control {
@@ -126,12 +144,13 @@ p {
   border: 1px solid #ddd;
   border-radius: 4px;
   background-color: var(--secondary-light);
+  font-family: var(--font-body);
 }
 
 .form-control:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(0, 137, 123, 0.2);
+  box-shadow: 0 0 0 2px rgba(27, 94, 32, 0.2);
 }
 
 /* Form Validation Indicators */
@@ -162,67 +181,171 @@ p {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Quick Navigation Items */
+/* Navigation Icons */
+.nav-icon {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+/* Quick Navigation Items with 2D Icons */
 .quick-nav-item {
   text-decoration: none;
   color: inherit;
   text-align: center;
-  padding: 1.2rem 0;
-  /* Inherits card styles */
+  padding: 1.5rem 0;
   background-color: var(--secondary-light);
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.quick-nav-item div {
-  color: var(--text-dark);
+.quick-nav-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.quick-nav-item div:first-child {
-   font-size: 2.2rem;
+.quick-nav-item .icon-2d {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.quick-nav-item:hover .icon-2d {
+  transform: scale(1.1);
+}
+
+.quick-nav-item .icon-2d i:first-child {
+  font-size: 2rem;
+  color: var(--primary);
+  position: relative;
+  z-index: 2;
+}
+
+.quick-nav-item .icon-2d i:last-child {
+  font-size: 1.2rem;
+  color: var(--accent);
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  z-index: 3;
+  background: var(--secondary-light);
+  padding: 4px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .quick-nav-item div:nth-child(2) {
-   font-weight: 600;
-   margin-top: 0.5rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  color: var(--text-dark);
+  font-size: 1.1rem;
 }
 
 .quick-nav-item div:last-child {
-   font-size: 0.95rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-top: 0.25rem;
 }
 
-/* Navigation */
+/* Quick Navigation Grid */
+.quick-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.2rem;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Bottom Navigation */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: white;
+  background-color: var(--secondary-light);
   display: flex;
   justify-content: space-around;
   padding: 10px 0;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--secondary-dark);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
 }
 
-.nav-item {
+.bottom-nav .nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-decoration: none;
   color: var(--text-light);
+  padding: 8px 4px; /* Adjusted padding */
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  flex-grow: 1; /* Allow items to grow */
+  text-align: center; /* Center text */
 }
 
-.nav-item.active {
+.bottom-nav .nav-item:hover {
   color: var(--primary);
+  background-color: var(--secondary);
 }
 
-.nav-icon {
+.bottom-nav .nav-item.active {
+  color: var(--highlight);
+  background-color: var(--secondary);
+}
+
+.bottom-nav .nav-item .nav-icon {
   font-size: 1.5rem;
   margin-bottom: 4px;
+  transition: color 0.3s ease;
 }
 
-.nav-text {
-  font-size: 0.8rem;
+/* 2D Icon styles for Bottom Navigation */
+.bottom-nav .nav-item .icon-2d {
+  position: relative;
+  width: 30px; /* Smaller size for bottom nav */
+  height: 30px; /* Smaller size for bottom nav */
+  margin: 0 auto 4px; /* Center and space below icon */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary);
+  border-radius: 50%;
+}
+
+.bottom-nav .nav-item .icon-2d i:first-child {
+  font-size: 1.2rem; /* Smaller icon size */
+  color: var(--primary);
+  position: relative;
+  z-index: 2;
+}
+
+.bottom-nav .nav-item .icon-2d i:last-child {
+  font-size: 0.7rem; /* Smaller accent icon size */
+  color: var(--accent);
+  position: absolute;
+  bottom: -2px; /* Adjusted position */
+  right: -2px; /* Adjusted position */
+  z-index: 3;
+  background: var(--secondary-light);
+  padding: 2px; /* Adjusted padding */
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-nav .nav-text {
+    font-size: 0.7rem; /* Smaller text size */
+    font-weight: 600;
 }
 
 /* Header */
@@ -234,8 +357,9 @@ p {
 .logo {
   font-size: 2.5rem;
   color: var(--primary);
-  font-weight: bold;
-  font-style: italic;
+  font-weight: 900;
+  font-style: normal;
+  font-family: var(--font-heading);
 }
 
 /* Welcome Page */
@@ -252,12 +376,16 @@ p {
 .welcome-title {
   font-size: 3rem;
   margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
 }
 
 .welcome-subtitle {
   font-size: 1.5rem;
   margin-bottom: 2rem;
   color: var(--text-light);
+  font-family: var(--font-body);
+  font-weight: 300;
 }
 
 .welcome-actions {
@@ -439,6 +567,88 @@ p {
   #task-list {
     margin-top: 1.5rem;
   }
+
+  .bottom-nav {
+    padding: 8px 0; /* Reduced vertical padding */
+  }
+
+  .bottom-nav .nav-item {
+    padding: 6px 0; /* Reduced vertical padding for items */
+    flex-grow: 1;
+    flex-basis: 0;
+    text-align: center;
+  }
+
+  .bottom-nav .nav-item .icon-2d {
+    width: 26px; /* Further reduced size */
+    height: 26px;
+    margin: 0 auto 1px; /* Reduce margin below icon */
+  }
+
+  .bottom-nav .nav-item .icon-2d i:first-child {
+    font-size: 1rem; /* Reduced primary icon size */
+  }
+
+  .bottom-nav .nav-item .icon-2d i:last-child {
+    font-size: 0.6rem; /* Reduced accent icon size */
+    bottom: -1px;
+    right: -1px;
+    padding: 1px;
+  }
+
+  .bottom-nav .nav-text {
+    font-size: 0.6rem; /* Reduced text size */
+    font-weight: 600;
+    display: block;
+    margin-top: 1px; /* Reduced margin above text */
+  }
+
+  /* Quick Navigation Grid Adjustments */
+  .quick-nav-grid {
+    grid-template-columns: repeat(2, 1fr); /* Arrange items in a 2x2 grid */
+    gap: 0.8rem; /* Gap between items */
+    padding: 0 1rem; /* Horizontal padding for the grid container */
+  }
+
+  /* Quick Navigation Item Adjustments */
+  .quick-nav-item {
+    padding: 1rem 0.5rem; /* Adjusted vertical and added horizontal padding */
+    border-radius: 10px;
+    display: flex; /* Use flexbox for internal arrangement */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text */
+  }
+
+  .quick-nav-item .icon-2d {
+    width: 60px; /* Revert to original size for grid layout */
+    height: 60px;
+    margin: 0 auto 0.8rem; /* Center and keep margin below icon */
+  }
+
+  .quick-nav-item .icon-2d i:first-child {
+     font-size: 2rem; /* Revert to original icon size */
+  }
+
+  .quick-nav-item .icon-2d i:last-child {
+     font-size: 1.2rem; /* Revert to original accent icon size */
+     bottom: 5px;
+     right: 5px;
+     padding: 4px;
+  }
+
+  .quick-nav-item div:nth-child(2) {
+    font-weight: 600;
+    font-size: 1.1rem; /* Revert to original title font size */
+    margin-top: 0.5rem; /* Revert to original margin top */
+    margin-bottom: 0.2rem;
+  }
+
+  .quick-nav-item div:last-child {
+    font-size: 0.9rem; /* Revert to original subtitle font size */
+    color: var(--text-light);
+    margin-top: 0.1rem;
+  }
 }
 
 /* Tasks Page Styles */
@@ -466,7 +676,7 @@ p {
 .task-description {
     flex-grow: 1;
     margin-right: 10px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Ensure consistent font */
+    font-family: var(--font-body);
     color: var(--text-dark);
     /* Text decoration handled in JS based on completion */
 }
@@ -478,7 +688,7 @@ p {
     font-size: 1.1rem;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-body);
 }
 
 .delete-task-btn {
@@ -509,7 +719,7 @@ p {
     border: 1px solid #ddd;
     border-radius: 4px;
     background-color: var(--secondary-light);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-body);
 }
 
 #new-task-input:focus {

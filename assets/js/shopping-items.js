@@ -196,23 +196,12 @@ function renderShoppingItem(item, container) {
             </div>
         </div>
         <p>${item.is_purchased ? 'Purchased' : 'Not Purchased'}</p>
-        ${item.image_url ? `<img src="${item.image_url}" alt="${item.name}" style="max-width: 100%; height: auto; margin-bottom: 10px;">` : ''}
-        
-        <!-- Image Upload -->
-        <div class="form-group mt-2">
-            <label for="image-upload-${item.id}" class="form-label">Upload Image</label>
-            <input type="file" id="image-upload-${item.id}" class="form-control" accept="image/*" data-item-id="${item.id}">
-        </div>
     `;
 
     // Add event listeners after rendering
     // itemElement.querySelector('.add-comment-form').addEventListener('submit', handleAddComment);
     itemElement.querySelector('.mark-purchased').addEventListener('change', handleMarkPurchased);
     itemElement.querySelector('.delete-item').addEventListener('click', handleDeleteItem);
-    const imageUploadInput = itemElement.querySelector(`#image-upload-${item.id}`);
-    if (imageUploadInput) {
-        imageUploadInput.addEventListener('change', handleImageUpload);
-    }
 
     // Append to container (for initial load)
     // Realtime updates will handle insertion/removal at specific positions if needed
@@ -262,10 +251,6 @@ async function handleRealtimeUpdate(payload, container) {
                  // newItemElement.querySelector('.add-comment-form').addEventListener('submit', handleAddComment);
                  newItemElement.querySelector('.mark-purchased').addEventListener('change', handleMarkPurchased);
                  newItemElement.querySelector('.delete-item').addEventListener('click', handleDeleteItem);
-                 const imageUploadInput = newItemElement.querySelector(`#image-upload-${item.id}`);
-                 if (imageUploadInput) {
-                     imageUploadInput.addEventListener('change', handleImageUpload);
-                 }
 
                 if (container.querySelector('.text-center') && container.querySelector('.text-center').textContent === 'No items in this list yet.') {
                      container.querySelector('.text-center').remove(); // Remove the 'No items' message
@@ -279,10 +264,6 @@ async function handleRealtimeUpdate(payload, container) {
                  // existingItemElement.querySelector('.add-comment-form').removeEventListener('submit', handleAddComment);
                  existingItemElement.querySelector('.mark-purchased').removeEventListener('change', handleMarkPurchased);
                  existingItemElement.querySelector('.delete-item').removeEventListener('click', handleDeleteItem);
-                 const existingImageUploadInput = existingItemElement.querySelector(`#image-upload-${item.id}`);
-                 if (existingImageUploadInput) {
-                    existingImageUploadInput.removeEventListener('change', handleImageUpload);
-                 }
 
                 const tempContainer = document.createElement('div');
                 renderShoppingItem(item, tempContainer);
@@ -292,10 +273,6 @@ async function handleRealtimeUpdate(payload, container) {
                  // existingItemElement.querySelector('.add-comment-form').addEventListener('submit', handleAddComment);
                  existingItemElement.querySelector('.mark-purchased').addEventListener('change', handleMarkPurchased);
                  existingItemElement.querySelector('.delete-item').addEventListener('click', handleDeleteItem);
-                 const imageUploadInput = existingItemElement.querySelector(`#image-upload-${item.id}`);
-                 if (imageUploadInput) {
-                     imageUploadInput.addEventListener('change', handleImageUpload);
-                 }
             }
             break;
         case 'DELETE':
@@ -384,37 +361,4 @@ async function handleDeleteItem(e) {
     }
 }
 
-async function handleImageUpload(e) {
-    const itemId = e.target.dataset.itemId;
-    const file = e.target.files[0];
-
-    if (!file) {
-        return; // No file selected
-    }
-
-    console.log(`Uploading image for item ${itemId}:`, file);
-
-    try {
-        const errorMessage = document.getElementById('error-message');
-        errorMessage.style.display = 'none';
-        
-        // Display a loading indicator if desired
-        // e.target.disabled = true;
-
-        await window.supabaseClient.uploadShoppingItemImage(itemId, file);
-        console.log('Image upload successful');
-
-        // Reload items to display the new image
-        const urlParams = new URLSearchParams(window.location.search);
-        const categoryId = urlParams.get('id');
-        await loadShoppingItems(categoryId);
-
-    } catch (error) {
-        console.error('Error uploading image:', error);
-        const errorMessage = document.getElementById('error-message');
-        errorMessage.textContent = error.message || 'Failed to upload image.';
-        errorMessage.style.display = 'block';
-        // Re-enable input if desired
-        // e.target.disabled = false;
-    }
-} 
+// async function handleImageUpload(e) { /* ... removed ... */ } 
